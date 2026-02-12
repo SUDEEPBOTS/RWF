@@ -1,36 +1,43 @@
-// Smooth Scroll for Navigation Links
+// 1. Scroll hone par Animation Trigger karna
+const observerOptions = {
+    threshold: 0.3 // Jab 30% section screen pe aa jaye
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const items = entry.target.querySelectorAll('.spec-item');
+            
+            // Har item ko thode delay ke baad animate karna
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, index * 200); // 200ms gap between each item
+            });
+            
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+const specsContainer = document.getElementById('animatedSpecs');
+if(specsContainer) {
+    observer.observe(specsContainer);
+}
+
+// 2. Smooth Scroll for "Order Now" button
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
     });
 });
 
-// Form Handling (Professional Alert)
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+// 3. Form Submit Alert (Professional)
+document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const qty = document.getElementById('quantity').value;
-    
-    if(name && qty) {
-        alert(`Thank you, ${name}. Your inquiry for ${qty} cases has been received. Our sales team will contact you at +91 9311957177 within 24 hours.`);
-        this.reset();
-    }
-});
-
-// Navbar Scroll Effect (Background darker on scroll)
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(0, 0, 0, 1)';
-    } else {
-        navbar.style.background = 'rgba(17, 17, 17, 0.95)';
-    }
+    alert("Thank you. Your wholesale inquiry has been registered. Our sales team will contact you shortly.");
+    this.reset();
 });
