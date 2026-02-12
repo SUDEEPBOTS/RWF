@@ -1,297 +1,226 @@
-/* RESET & VARS */
+/* --- RESET & VARIABLES --- */
 :root {
-    --primary-color: #0056b3; /* Deep Corporate Blue */
-    --accent-color: #00a8ff;  /* Bright Water Blue */
-    --dark-bg: #111111;
-    --light-bg: #f4f7f6;
-    --text-dark: #333;
-    --text-light: #eee;
-    --font-main: 'Inter', sans-serif;
+    --primary: #ffffff;
+    --accent: #007bff; /* Professional Blue */
+    --dark: #0a0a0a;
+    --text-grey: #cccccc;
+    --font: 'Inter', sans-serif;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: var(--font-main);
-    line-height: 1.6;
-    color: var(--text-dark);
-}
-
-/* NAVIGATION */
-.navbar {
-    background: rgba(17, 17, 17, 0.95);
-    padding: 1rem 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid #333;
+    font-family: var(--font);
+    background-color: var(--dark);
+    color: var(--primary);
+    overflow-x: hidden;
 }
 
 .container {
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.logo {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: 1px;
+/* --- NAVBAR --- */
+.navbar {
+    position: absolute;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 100;
+    background: transparent;
+}
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 2px; }
+.btn-nav { 
+    color: white; text-decoration: none; border: 1px solid white; 
+    padding: 8px 20px; font-size: 0.8rem; text-transform: uppercase; 
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: #aaa;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: white;
-}
-
-.btn-contact {
-    border: 1px solid white;
-    padding: 8px 20px;
-    border-radius: 4px;
-}
-
-.btn-contact:hover {
-    background: white;
-    color: black !important;
-}
-
-/* HERO SECTION */
-.hero {
+/* --- SECTION 1: HERO (IMAGE BACKGROUND) --- */
+.hero-section {
     height: 100vh;
-    background: url('assets/water-bg.jpg') no-repeat center center/cover;
-    /* Agar image nahi hai to dark color use karega */
-    background-color: #0f1c2e; 
     display: flex;
     align-items: center;
     position: relative;
-    color: white;
+    /* Yahan apni Dark Water Photo ka naam dalna */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('assets/dark-water.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.hero-text h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: var(--text-grey);
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: black;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-primary:hover { background: var(--accent); color: white; }
+
+/* Floating Animation Bottle */
+.floating-bottle {
+    height: 550px;
+    filter: drop-shadow(0 0 30px rgba(0,0,0,0.5));
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- SECTION 2: PRODUCT (VIDEO BACKGROUND) --- */
+.video-section {
+    position: relative;
+    padding: 100px 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Video Background Settings */
+.bg-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -2;
 }
 
 .overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%);
+    background: rgba(0,0,0,0.7); /* Darken video text ke liye */
+    z-index: -1;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 800px;
-}
-
-.hero h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    color: #ccc;
-    max-width: 600px;
-    margin-bottom: 30px;
-}
-
-.btn-primary {
-    background: var(--primary-color);
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 5px;
-    display: inline-block;
-    transition: 0.3s;
-}
-
-.btn-primary:hover {
-    background: var(--accent-color);
-}
-
-.btn-secondary {
-    border: 1px solid white;
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 5px;
-    margin-left: 15px;
-    transition: 0.3s;
-}
-
-.btn-secondary:hover {
-    background: rgba(255,255,255,0.1);
-}
-
-/* SECTIONS */
-.section-light {
-    padding: 100px 0;
-    background: var(--light-bg);
-}
-
-.section-dark {
-    padding: 100px 0;
-    background: var(--dark-bg);
-    color: white;
-}
-
-.row {
+.product-grid {
     display: flex;
     align-items: center;
     gap: 50px;
+    position: relative;
+    z-index: 1;
 }
 
-.col-text { flex: 1; }
-.col-image { flex: 1; text-align: center; }
+.static-bottle { height: 500px; }
 
-.product-shot {
-    max-height: 500px;
-    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));
+.product-details h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    border-left: 5px solid var(--accent);
+    padding-left: 20px;
 }
 
-.specs-list {
-    list-style: none;
-    margin-top: 20px;
+/* Animation Items */
+.spec-item {
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+    
+    /* Hidden Start State */
+    opacity: 0;
+    transform: translateX(50px); /* Right se aayega */
+    transition: all 0.8s ease-out;
 }
 
-.specs-list li {
-    padding: 15px 0;
-    border-bottom: 1px solid #ddd;
-    font-size: 1rem;
+.spec-item h3 { font-size: 1.2rem; color: var(--accent); margin-bottom: 5px; }
+.spec-item p { font-size: 0.9rem; color: #ddd; }
+
+/* Jab JS class add karega tab ye dikhega */
+.spec-item.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-/* VIDEO */
-.video-wrapper {
-    margin-top: 40px;
-    border: 1px solid #333;
-    padding: 10px;
-    background: #000;
-}
-
-video {
-    width: 100%;
-    display: block;
-}
-
-/* FOOTER & FORM */
+/* --- FOOTER --- */
 footer {
     background: #000;
-    color: #888;
-    padding: 80px 0 20px;
+    padding: 80px 0 30px;
+    text-align: center;
 }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: start;
+.contact-form {
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: left;
 }
 
-h3 {
-    color: white;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-}
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 0.8rem; margin-bottom: 8px; color: #888; letter-spacing: 1px; }
 
 input {
     width: 100%;
-    padding: 12px;
-    background: #222;
-    border: 1px solid #444;
+    padding: 15px;
+    background: #111;
+    border: 1px solid #333;
     color: white;
-    border-radius: 4px;
+    font-family: var(--font);
 }
 
-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}
+input:focus { outline: none; border-color: var(--accent); }
 
 .btn-submit {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     background: white;
-    color: black;
     border: none;
-    font-weight: bold;
+    font-weight: 800;
     cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: 0.3s;
+    margin-top: 10px;
 }
 
-.btn-submit:hover {
-    background: var(--accent-color);
-    color: white;
-}
+.copyright { margin-top: 50px; color: #444; font-size: 0.8rem; }
 
-.copyright {
-    text-align: center;
-    margin-top: 60px;
-    border-top: 1px solid #222;
-    padding-top: 20px;
-    font-size: 0.8rem;
-}
-
-/* ANIMATIONS */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s forwards;
-}
-
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive */
+/* --- MOBILE RESPONSIVE (Yahan hai magic) --- */
 @media (max-width: 768px) {
-    .row, .footer-grid {
-        flex-direction: column;
-        display: flex;
+    /* Hero Section */
+    .hero-section { height: auto; padding: 120px 0 60px; text-align: center; }
+    .hero-grid { flex-direction: column-reverse; } /* Photo upar, text neeche */
+    
+    .hero-text h1 { font-size: 2.5rem; }
+    .floating-bottle { height: 350px; margin-bottom: 30px; }
+    
+    /* Product Section */
+    .video-section { padding: 60px 0; height: auto; }
+    .product-grid { flex-direction: column; text-align: center; }
+    .static-bottle { height: 300px; margin-bottom: 30px; }
+    
+    .product-details h2 { 
+        font-size: 1.8rem; 
+        border-left: none; 
+        border-bottom: 3px solid var(--accent);
+        padding-bottom: 10px;
+        display: inline-block;
     }
-    .hero h1 { font-size: 2.5rem; }
-    .col-image { margin-top: 40px; }
-}
+    
+    .spec-item { transform: translateY(30px); } /* Mobile pe neeche se upar aayega */
+        }
+    
