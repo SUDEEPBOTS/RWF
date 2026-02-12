@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RWF International | Premium Hydration</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">RWF INTERNATIONAL</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#product">Our Product</a></li>
+                <li><a href="#media">Media</a></li>
+                <li><a href="#contact" class="btn-contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="overlay"></div>
+        <div class="container hero-content">
+            <h1 class="fade-in">Purity in Every Drop.</h1>
+            <p class="fade-in delay-1">Experience the crisp taste of nature, bottled at the source. RWF represents the pinnacle of hydration technology.</p>
+            <div class="btn-group fade-in delay-2">
+                <a href="#contact" class="btn-primary">Place Wholesale Order</a>
+                <a href="#product" class="btn-secondary">View Specifications</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="product" class="section-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-text">
+                    <h2>Engineered for Perfection</h2>
+                    <p class="subtitle">RWF water goes through a rigorous 10-step filtration process.</p>
+                    <ul class="specs-list">
+                        <li><strong>pH Balance:</strong> Perfectly balanced (7.2 - 7.5)</li>
+                        <li><strong>Minerals:</strong> Enriched with Magnesium & Calcium</li>
+                        <li><strong>Packaging:</strong> BPA-Free, Recyclable Material</li>
+                        <li><strong>Source:</strong> Deep Aquifer Filtration</li>
+                    </ul>
+                </div>
+                <div class="col-image">
+                    <img src="assets/bottle.png" alt="RWF Premium Bottle" class="product-shot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="media" class="section-dark">
+        <div class="container text-center">
+            <h2>Cinematic Experience</h2>
+            <p>Visualizing the essence of purity.</p>
+            <div class="video-wrapper">
+                <video controls loop muted poster="assets/poster.jpg">
+                    <source src="assets/ad-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Contact Information</h3>
+                <p><strong>Corporate Office:</strong><br>
+                Awana Complex, Gejha, Sector 93,<br>
+                Noida, Uttar Pradesh - 201304, India</p>
+                <br>
+                <p><strong>Customer Care:</strong> +91 9311957177</p>
+                <p><strong>Email:</strong> info@rwfnoida.com</p>
+                <p><strong>Web:</strong> www.rwfwater.com</p>
+            </div>
+            
+            <div class="footer-col form-col">
+                <h3>Business Inquiries</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Requirement (Cases)</label>
+                        <input type="number" id="quantity">
+                    </div>
+                    <button type="submit" class="btn-submit">Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 RWF International Private Limited. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
