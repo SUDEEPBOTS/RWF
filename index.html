@@ -3,503 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RWF International – premium hydration</title>
-    <!-- Google Fonts + professional system fallback -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>RWF International | The Essence of Purity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
     <style>
-        /* ---------- RESET & GLOBAL — CORPORATE REFINEMENT ---------- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* --- RESET & BASICS --- */
+        :root {
+            --primary: #0f172a; /* Deep Navy */
+            --accent: #38bdf8;  /* Water Blue */
+            --gold: #cca43b;    /* Premium Gold */
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #F5F7FA;
-            color: #1E2B3C;
-            line-height: 1.5;
-            scroll-behavior: smooth;
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--primary);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; }
+        .serif { font-family: 'Playfair Display', serif; font-style: italic; color: var(--accent); }
+
+        /* --- NAVIGATION (Glassmorphism) --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.4s var(--ease);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .container {
-            max-width: 1280px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        /* ---------- TYPOGRAPHY – ELEVATED, CLEAN ---------- */
-        h1, h2, h3 {
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        h1 {
-            font-size: 4.2rem;
-            font-weight: 800;
-            color: #0A1C2F;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: #0F2A40;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.01em;
-        }
-
-        p {
-            color: #3E5A70;
-            font-weight: 400;
-            font-size: 1.1rem;
-        }
-
-        /* ---------- NAVIGATION – REFINED, NO NOISE ---------- */
-        .navbar {
-            background-color: white;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(0,40,80,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            background-color: rgba(255,255,255,0.92);
-        }
-
-        .nav-container {
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
+            font-size: 1.5rem;
             font-weight: 800;
-            font-size: 1.65rem;
-            letter-spacing: -0.02em;
-            color: #0D2E41;
-            border-left: 5px solid #2A7F6E;
-            padding-left: 16px;
-            line-height: 1.2;
+            letter-spacing: 2px;
+            color: white;
+            text-decoration: none;
         }
 
         .btn-nav {
-            background-color: transparent;
-            border: 1.5px solid #2A7F6E;
-            color: #2A7F6E;
-            font-weight: 600;
-            padding: 12px 28px;
-            border-radius: 40px;
+            padding: 10px 25px;
+            border: 1px solid var(--light);
+            color: var(--light);
             text-decoration: none;
-            font-size: 0.95rem;
-            letter-spacing: 0.02em;
-            transition: all 0.25s ease;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
         }
 
         .btn-nav:hover {
-            background-color: #2A7F6E;
-            color: white;
+            background: var(--light);
+            color: var(--primary);
         }
 
-        /* ---------- HERO – BOTTLED ELEGANCE ---------- */
+        /* --- HERO SECTION --- */
         .hero-section {
-            padding: 60px 0 80px;
-            background: linear-gradient(145deg, #FFFFFF 0%, #F1F6FA 100%);
-        }
-
-        .hero-grid {
+            height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-text {
-            flex: 1.1;
+        .hero-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15vw;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .hero-text p {
-            font-size: 1.35rem;
-            font-weight: 350;
-            color: #3E6575;
-            margin: 24px 0 32px;
-            border-left: 4px solid #2A7F6E;
-            padding-left: 24px;
+        .hero-content {
+            z-index: 2;
+            max-width: 600px;
+            margin-left: 10%;
+            opacity: 0; /* JS Animation */
+            transform: translateY(30px); /* JS Animation */
+            transition: all 1s var(--ease);
+        }
+
+        .hero-content.visible { opacity: 1; transform: translateY(0); }
+
+        h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            max-width: 400px;
         }
 
         .btn-primary {
-            display: inline-block;
-            background-color: #0D2E41;
-            color: white;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 18px 48px;
-            border-radius: 50px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 15px 40px;
             text-decoration: none;
-            letter-spacing: 0.08em;
-            border: none;
-            transition: background 0.2s, transform 0.1s;
-            box-shadow: 0 8px 20px rgba(13,46,65,0.1);
+            font-weight: 700;
+            display: inline-block;
+            transition: transform 0.3s;
         }
 
-        .btn-primary:hover {
-            background-color: #1C4E5C;
-            box-shadow: 0 12px 28px rgba(33,94,94,0.2);
+        .btn-primary:hover { transform: scale(1.05); }
+
+        .hero-image-container {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
         }
 
-        .hero-image {
-            flex: 0.9;
+        /* Fallback if no image */
+        .bottle-placeholder {
+            width: 300px;
+            height: 600px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(56, 189, 248, 0.2));
+            border-radius: 150px;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features-section {
+            padding: 100px 0;
+            background: #0b1221;
+        }
+
+        .section-header {
             text-align: center;
+            margin-bottom: 80px;
         }
 
-        .floating-bottle {
-            max-width: 90%;
-            height: auto;
-            filter: drop-shadow(0 18px 28px rgba(0,40,50,0.14));
-            transform: translateY(0);
-            animation: float 5s infinite ease-in-out;
+        .section-header h2 { font-size: 3rem; margin-bottom: 10px; }
+        .section-header span { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .spec-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            transition: transform 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        /* ---------- VIDEO / SCIENTIFIC SECTION – elevated ---------- */
+        .spec-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+
+        .spec-num { font-size: 3rem; color: var(--glass-border); font-weight: 900; margin-bottom: 20px; }
+        .spec-title { font-size: 1.5rem; margin-bottom: 15px; }
+        .spec-desc { color: #94a3b8; font-size: 0.95rem; }
+
+        /* --- VIDEO / SHOWCASE --- */
         .video-section {
+            height: 80vh;
             position: relative;
-            background-color: #162B37;
-            background-image: linear-gradient(115deg, #10242E 0%, #1C3A44 100%);
-            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
         .bg-video {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
-            opacity: 0.25;
-            pointer-events: none;
+            opacity: 0.4;
+            z-index: 0;
         }
+        
+        /* Fallback if video fails */
+        .video-section { background: #050a14; }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 30%, rgba(0,20,30,0.35) 0%, rgba(7,27,37,0.8) 100%);
-            z-index: 1;
-        }
-
-        .product-grid {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            color: white;
-        }
-
-        .product-visual {
-            flex: 1;
+        .video-overlay-text {
+            z-index: 2;
             text-align: center;
         }
-
-        .static-bottle {
-            max-width: 70%;
-            filter: drop-shadow(0 8px 18px rgba(0,0,0,0.3));
+        
+        .video-overlay-text h2 {
+            font-size: 4rem;
+            margin-bottom: 20px;
         }
 
-        .product-details {
-            flex: 1.2;
+        /* --- CONTACT / FOOTER --- */
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(to top, #000, #0f172a);
         }
 
-        .product-details h2 {
-            color: white;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 40px;
-            border-bottom: 3px solid rgba(84, 187, 174, 0.5);
-            display: inline-block;
-            padding-bottom: 12px;
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .specs-container {
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-        }
-
-        .spec-item h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #B5E8E0;
-            letter-spacing: 0.03em;
-            margin-bottom: 6px;
-        }
-
-        .spec-item p {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.85);
-            font-weight: 350;
-            line-height: 1.6;
-            max-width: 460px;
-        }
-
-        /* ---------- FOOTER – CORPORATE, INQUIRY ---------- */
-        footer {
-            background: #0A1E28;
-            color: white;
-            padding: 72px 0 40px;
-        }
-
-        footer h2 {
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        footer p {
-            color: #C0D6DD;
-            font-size: 1.05rem;
-            margin-bottom: 40px;
-            font-weight: 350;
-        }
+        .contact-info h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .contact-info p { color: #94a3b8; margin-bottom: 10px; }
 
         .contact-form {
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(8px);
-            padding: 44px 48px;
-            border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.1);
-            margin: 32px 0 52px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            color: #9ECED9;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
+        .form-group { position: relative; }
 
         .form-group input {
             width: 100%;
             background: transparent;
             border: none;
-            border-bottom: 1.5px solid rgba(255,255,255,0.25);
-            padding: 12px 4px 12px 0;
-            font-size: 1.1rem;
+            border-bottom: 1px solid #334155;
+            padding: 15px 0;
             color: white;
-            font-weight: 400;
+            font-size: 1.1rem;
             outline: none;
-            transition: border 0.2s;
+            transition: border-color 0.3s;
         }
 
-        .form-group input:focus {
-            border-bottom-color: #62B5AD;
+        .form-group input:focus { border-color: var(--accent); }
+
+        .form-group label {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            color: #64748b;
+            pointer-events: none;
+            transition: 0.3s ease all;
+            font-size: 0.9rem;
         }
 
-        .form-group input::placeholder {
-            color: rgba(200,225,230,0.4);
-            font-weight: 300;
+        .form-group input:focus ~ label,
+        .form-group input:valid ~ label {
+            top: -10px;
+            font-size: 0.75rem;
+            color: var(--accent);
         }
 
         .btn-submit {
-            background-color: #2A7F6E;
-            border: none;
-            color: white;
-            font-weight: 700;
-            padding: 18px 38px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            cursor: pointer;
             margin-top: 20px;
-            transition: background 0.2s;
-            border: 1px solid rgba(255,255,255,0.15);
+            background: white;
+            color: black;
+            border: none;
+            padding: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
         }
 
-        .btn-submit:hover {
-            background-color: #3A9A87;
-        }
+        .btn-submit:hover { background: var(--accent); color: white; }
 
-        .copyright {
+        .footer-bottom {
             text-align: center;
-            color: #84A4AE;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 40px;
-            margin-top: 30px;
-            font-weight: 350;
+            padding-top: 80px;
+            color: #475569;
+            font-size: 0.8rem;
         }
 
-        /* ---------- RESPONSIVE – PROFESSIONAL FLEX ---------- */
-        @media (max-width: 1024px) {
-            h1 { font-size: 3.5rem; }
-            .hero-grid, .product-grid { flex-direction: column; }
-            .hero-text { text-align: center; }
-            .hero-text p { border-left: none; padding-left: 0; border-top: 3px solid #2A7F6E; padding-top: 20px; max-width: 550px; margin-left: auto; margin-right: auto; }
-            .product-grid { text-align: center; }
-            .product-details h2 { display: block; text-align: center; }
-            .specs-container { align-items: center; }
-            .spec-item p { margin: 0 auto; }
-        }
-
-        @media (max-width: 640px) {
-            .container { padding: 0 24px; }
-            h1 { font-size: 2.7rem; }
-            .btn-primary { padding: 16px 32px; }
-            .contact-form { padding: 32px 24px; }
-        }
-
-        /* ---------- PLACEHOLDER FOR ASSETS – professional fallback ---------- */
-        .floating-bottle, .static-bottle {
-            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 400'%3E%3Cpath fill='%23235c6b' d='M80 50 L120 50 L140 140 L140 300 Q120 340 100 340 Q60 340 60 300 L60 140 Z'/%3E%3Cpath fill='%2349a894' d='M90 40 L110 40 L115 70 L85 70Z'/%3E%3C/svg%3E");
-        }
-
-        .bg-video {
-            background: radial-gradient(circle at center, #2C4A55, #13222B);
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .hero-bg-text { display: none; }
+            .hero-section { flex-direction: column; padding-top: 120px; text-align: center; height: auto; padding-bottom: 60px; }
+            .hero-content { margin-left: 0; }
+            .hero-image-container { position: relative; right: auto; top: auto; transform: none; margin-top: 50px; display: flex; justify-content: center;}
+            .contact-wrapper { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- PROFESSIONAL NAVIGATION – subtle prestige -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <div class="logo">RWF INTERNATIONAL</div>
-            <a href="#contact" class="btn-nav">📩 wholesale</a>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">RWF INT.</a>
+            <a href="#contact" class="btn-nav">Partner Inquiry</a>
         </div>
     </nav>
 
-    <!-- HERO – elevated product storytelling -->
-    <header id="hero" class="hero-section">
-        <div class="container hero-grid">
-            <div class="hero-text">
-                <h1>PURITY IN<br>EVERY DROP.</h1>
-                <p>Premium alkaline water — 7.5 pH, mineral‑infused, sustainably sourced.</p>
-                <a href="#contact" class="btn-primary">ORDER NOW</a>
-            </div>
-            <div class="hero-image">
-                <!-- bottle graphic refined, fluid form -->
-                <img src="assets/bottle.png" alt="RWF signature bottle" class="floating-bottle" onerror="this.style.opacity='0.95'; this.style.minWidth='180px';">
-            </div>
+    <header class="hero-section">
+        <div class="hero-bg-text">RWF PREMIUM</div>
+        
+        <div class="hero-content">
+            <span class="serif">Designed by Nature</span>
+            <h1>PURITY IN<br>EVERY DROP.</h1>
+            <p class="hero-p">Experience the distinction of alkaline hydration. Sourced from the pristine aquifers, bottled for the elite.</p>
+            <a href="#contact" class="btn-primary">PLACE ORDER</a>
+        </div>
+
+        <div class="hero-image-container">
+            <div class="bottle-placeholder"></div>
         </div>
     </header>
 
-    <!-- SCIENTIFIC / BRAND STORY – quiet authority, elevated video treatment -->
-    <section id="product" class="video-section">
-        <!-- video placeholder with sophisticated gradient overlay (actual mp4 plays if exists) -->
-        <video autoplay muted loop playsinline class="bg-video">
-            <source src="assets/ad-video.mp4" type="video/mp4">
-            <!-- fallback: sophisticated animation not needed – background solid -->
-        </video>
-        
-        <div class="overlay"></div> <!-- refined overlayer for readability -->
+    <section class="features-section">
+        <div class="section-header">
+            <span>The Science</span>
+            <h2>ENGINEERED FOR BALANCE</h2>
+        </div>
 
-        <div class="container product-grid">
-            <div class="product-visual">
-                <img src="assets/bottle.png" alt="RWF bottle technical side" class="static-bottle" onerror="this.style.opacity='0.9';">
+        <div class="specs-grid">
+            <div class="spec-card observer-item">
+                <div class="spec-num">7.5</div>
+                <div class="spec-title">Perfect pH</div>
+                <div class="spec-desc">Optimized alkalinity to neutralize acidity and restore your body's natural balance.</div>
             </div>
-            
-            <div class="product-details">
-                <h2>SCIENTIFICALLY BALANCED</h2>
-                <div class="specs-container" id="animatedSpecs">
-                    <div class="spec-item">
-                        <h3>⚖️ pH 7.5 — PERFECT BALANCE</h3>
-                        <p>Optimized alkalinity for rapid hydration and natural taste, verified by independent labs.</p>
-                    </div>
-                    <div class="spec-item">
-                        <h3>💎 MINERAL RICH</h3>
-                        <p>Magnesium, Calcium & Potassium — electrolytes without artificial additives.</p>
-                    </div>
-                    <div class="spec-item">
-                        <h3>🌿 ECO-CONSCIOUS</h3>
-                        <p>100% recyclable, BPA‑free bottles. Low‑carbon production, zero plastic waste.</p>
-                    </div>
-                </div>
+            <div class="spec-card observer-item" style="transition-delay: 0.1s">
+                <div class="spec-num">Mg+</div>
+                <div class="spec-title">Mineral Rich</div>
+                <div class="spec-desc">Naturally infused with Magnesium, Calcium, and Potassium for peak performance.</div>
+            </div>
+            <div class="spec-card observer-item" style="transition-delay: 0.2s">
+                <div class="spec-num">0%</div>
+                <div class="spec-title">Impurity</div>
+                <div class="spec-desc">Rigorous 12-step filtration process ensures absolutely zero contaminants.</div>
             </div>
         </div>
     </section>
 
-    <!-- CORPORATE FOOTER – wholesale, professional tone, refined spacing -->
-    <footer id="contact">
-        <div class="container">
-            <h2>WHOLESALE INQUIRIES</h2>
-            <p style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;">📌 corporate office – Sector 93, Gejha, Noida - 201304</p>
-            
-            <form id="orderForm" class="contact-form">
-                <div class="form-group">
-                    <label>BUSINESS / FULL NAME</label>
-                    <input type="text" placeholder="e.g. Sunshine Hotels Pvt Ltd" required>
-                </div>
-                <div class="form-group">
-                    <label>MOBILE NUMBER</label>
-                    <input type="tel" placeholder="+91 98765 43210" required>
-                </div>
-                <div class="form-group">
-                    <label>ESTIMATED QUANTITY (CASES)</label>
-                    <input type="number" placeholder="minimum 50 cases" required>
-                </div>
-                <button type="submit" class="btn-submit">SUBMIT REQUEST</button>
-            </form>
-            
-            <div class="copyright">
-                © 2026 RWF International Pvt Ltd. — premium hydration partner. All rights reserved.
+    <section class="video-section">
+        <video autoplay muted loop playsinline class="bg-video">
+            <source src="assets/ad-video.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay-text">
+            <span class="serif" style="font-size: 1.5rem;">The Source</span>
+            <h2>UNTAMED<br>PURITY</h2>
+        </div>
+    </section>
+
+    <footer id="contact" class="contact-section">
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h2>WHOLESALE &<br>CORPORATE</h2>
+                <p>Elevate your business with RWF International.</p>
+                <p style="margin-top: 20px;"><strong>Headquarters:</strong><br>Sector 93, Gejha, Noida - 201304</p>
+                <p><strong>Support:</strong><br>contact@rwfinternational.com</p>
             </div>
+            
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" required>
+                    <label>Company / Full Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="tel" required>
+                    <label>Direct Phone Line</label>
+                </div>
+                <div class="form-group">
+                    <input type="number" required>
+                    <label>Volume Requirement (Cases)</label>
+                </div>
+                <button type="submit" class="btn-submit">Request Catalog</button>
+            </form>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 RWF International Pvt Ltd. Crafted for Excellence.
         </div>
     </footer>
 
-    <!-- subtle script – professional form alert + asset fallback -->
     <script>
-        (function() {
-            // professional form handling – non‑intrusive, clean
-            const form = document.getElementById('orderForm');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // simulated corporate acknowledgment
-                    alert('✅ Your wholesale request has been submitted. A senior account manager will respond within 4 hours.');
-                    form.reset();
-                });
+        // Navbar Scrolled Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
             }
+        });
 
-            // visual polish: if bottle assets are missing, SVG silhouettes remain elegant (already defined via CSS content)
-            // additional check for actual asset load – keep corporate feel
-            const bottles = document.querySelectorAll('.floating-bottle, .static-bottle');
-            bottles.forEach(img => {
-                // if real asset fails, we already have SVG fallback via CSS content.
-                // force consistent display
-                img.addEventListener('error', function() {
-                    this.style.display = 'inline-block';
-                    this.style.width = '260px';
-                    this.style.height = 'auto';
-                });
+        // Hero Animation on Load
+        window.addEventListener('load', () => {
+            document.querySelector('.hero-content').classList.add('visible');
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
             });
+        }, observerOptions);
 
-            // video fallback handling – no console noise
-            const video = document.querySelector('.bg-video');
-            if (video) {
-                video.addEventListener('error', function() {
-                    this.style.background = 'linear-gradient(145deg, #1D3945, #10242E)';
-                });
-            }
-        })();
+        document.querySelectorAll('.observer-item').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
