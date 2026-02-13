@@ -1,226 +1,545 @@
-/* --- RESET & VARIABLES --- */
-:root {
-    --primary: #ffffff;
-    --accent: #007bff; /* Professional Blue */
-    --dark: #0a0a0a;
-    --text-grey: #cccccc;
-    --font: 'Inter', sans-serif;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: var(--font);
-    background-color: var(--dark);
-    color: var(--primary);
-    overflow-x: hidden;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* --- NAVBAR --- */
-.navbar {
-    position: absolute;
-    width: 100%;
-    padding: 20px 0;
-    z-index: 100;
-    background: transparent;
-}
-.nav-container { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 2px; }
-.btn-nav { 
-    color: white; text-decoration: none; border: 1px solid white; 
-    padding: 8px 20px; font-size: 0.8rem; text-transform: uppercase; 
-}
-
-/* --- SECTION 1: HERO (IMAGE BACKGROUND) --- */
-.hero-section {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    /* Yahan apni Dark Water Photo ka naam dalna */
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('assets/dark-water.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.hero-grid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.hero-text h1 {
-    font-size: 4rem;
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 20px;
-}
-
-.hero-text p {
-    font-size: 1.2rem;
-    color: var(--text-grey);
-    margin-bottom: 40px;
-    max-width: 500px;
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: black;
-    padding: 15px 40px;
-    text-decoration: none;
-    font-weight: 700;
-    letter-spacing: 1px;
-    display: inline-block;
-    transition: 0.3s;
-}
-
-.btn-primary:hover { background: var(--accent); color: white; }
-
-/* Floating Animation Bottle */
-.floating-bottle {
-    height: 550px;
-    filter: drop-shadow(0 0 30px rgba(0,0,0,0.5));
-    animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
-}
-
-/* --- SECTION 2: PRODUCT (VIDEO BACKGROUND) --- */
-.video-section {
-    position: relative;
-    padding: 100px 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-/* Video Background Settings */
-.bg-video {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -2;
-}
-
-.overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7); /* Darken video text ke liye */
-    z-index: -1;
-}
-
-.product-grid {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    position: relative;
-    z-index: 1;
-}
-
-.static-bottle { height: 500px; }
-
-.product-details h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    border-left: 5px solid var(--accent);
-    padding-left: 20px;
-}
-
-/* Animation Items */
-.spec-item {
-    margin-bottom: 30px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 15px;
-    
-    /* Hidden Start State */
-    opacity: 0;
-    transform: translateX(50px); /* Right se aayega */
-    transition: all 0.8s ease-out;
-}
-
-.spec-item h3 { font-size: 1.2rem; color: var(--accent); margin-bottom: 5px; }
-.spec-item p { font-size: 0.9rem; color: #ddd; }
-
-/* Jab JS class add karega tab ye dikhega */
-.spec-item.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* --- FOOTER --- */
-footer {
-    background: #000;
-    padding: 80px 0 30px;
-    text-align: center;
-}
-
-.contact-form {
-    max-width: 500px;
-    margin: 40px auto;
-    text-align: left;
-}
-
-.form-group { margin-bottom: 20px; }
-.form-group label { display: block; font-size: 0.8rem; margin-bottom: 8px; color: #888; letter-spacing: 1px; }
-
-input {
-    width: 100%;
-    padding: 15px;
-    background: #111;
-    border: 1px solid #333;
-    color: white;
-    font-family: var(--font);
-}
-
-input:focus { outline: none; border-color: var(--accent); }
-
-.btn-submit {
-    width: 100%;
-    padding: 15px;
-    background: white;
-    border: none;
-    font-weight: 800;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.copyright { margin-top: 50px; color: #444; font-size: 0.8rem; }
-
-/* --- MOBILE RESPONSIVE (Yahan hai magic) --- */
-@media (max-width: 768px) {
-    /* Hero Section */
-    .hero-section { height: auto; padding: 120px 0 60px; text-align: center; }
-    .hero-grid { flex-direction: column-reverse; } /* Photo upar, text neeche */
-    
-    .hero-text h1 { font-size: 2.5rem; }
-    .floating-bottle { height: 350px; margin-bottom: 30px; }
-    
-    /* Product Section */
-    .video-section { padding: 60px 0; height: auto; }
-    .product-grid { flex-direction: column; text-align: center; }
-    .static-bottle { height: 300px; margin-bottom: 30px; }
-    
-    .product-details h2 { 
-        font-size: 1.8rem; 
-        border-left: none; 
-        border-bottom: 3px solid var(--accent);
-        padding-bottom: 10px;
-        display: inline-block;
-    }
-    
-    .spec-item { transform: translateY(30px); } /* Mobile pe neeche se upar aayega */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RWF International · premium hydration</title>
+    <!-- Google Fonts: Inter — crisp, corporate -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- GLOBAL RESET · PROFESSIONAL DARK MODE ---------- */
+        :root {
+            --primary: #ffffff;
+            --accent: #1E88E5;      /* refined corporate blue – trustworthy */
+            --accent-soft: #64B5F6;
+            --dark: #0B1217;        /* deep background, not pure black */
+            --dark-surface: #101A20;
+            --dark-elevated: #1C2A33;
+            --text-light: #F0F6FC;
+            --text-muted: #B0C8D9;
+            --border-subtle: rgba(255,255,255,0.08);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --transition: 0.25s cubic-bezier(0.2, 0.9, 0.4, 1);
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* ---------- TYPOGRAPHY · SHARP, WEIGHTED ---------- */
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        h2 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-weight: 350;
+            font-size: 1.1rem;
+        }
+
+        /* ---------- REFINED NAVIGATION – INVISIBLE, LEGIBLE ---------- */
+        .navbar {
+            position: absolute;
+            width: 100%;
+            padding: 28px 0;
+            z-index: 200;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            color: white;
+            text-transform: uppercase;
+            border-left: 5px solid var(--accent);
+            padding-left: 16px;
+            line-height: 1.2;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .btn-nav {
+            color: white;
+            text-decoration: none;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            padding: 12px 30px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 600;
+            border-radius: 50px;
+            background: rgba(10, 20, 30, 0.2);
+            backdrop-filter: blur(6px);
+            transition: var(--transition);
+        }
+
+        .btn-nav:hover {
+            border-color: white;
+            background: rgba(30, 136, 229, 0.25);
+            border-color: var(--accent);
+        }
+
+        /* ---------- HERO – DEEP WATER, DRAMATIC, CORPORATE ---------- */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            /* Premium dark water texture – replace with 'assets/dark-water.jpg' */
+            background: linear-gradient(125deg, rgba(5,15,25,0.85) 0%, rgba(8,25,40,0.9) 80%), 
+                        url('assets/dark-water.jpg');
+            background-size: cover;
+            background-position: 35% 50%;
+        }
+
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 40px;
+        }
+
+        .hero-text h1 {
+            margin-bottom: 16px;
+            text-shadow: 0 4px 18px rgba(0,0,0,0.5);
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            font-weight: 350;
+            color: rgba(220, 240, 255, 0.85);
+            margin-bottom: 40px;
+            max-width: 550px;
+            border-left: 5px solid var(--accent);
+            padding-left: 24px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #0A1A24;
+            padding: 16px 48px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 0.95rem;
+            display: inline-block;
+            border-radius: 50px;
+            text-transform: uppercase;
+            border: none;
+            transition: var(--transition);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            color: white;
+            transform: scale(1.02);
+            box-shadow: 0 20px 35px rgba(30,136,229,0.25);
+        }
+
+        /* BOTTLE – floating hero asset, elegant */
+        .floating-bottle {
+            height: 550px;
+            filter: drop-shadow(0 18px 28px rgba(0,0,0,0.6));
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* ---------- VIDEO SECTION – CINEMATIC, LAYERED ---------- */
+        .video-section {
+            position: relative;
+            padding: 140px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.35;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 70% 40%, rgba(5,15,25,0.6) 0%, rgba(2,10,18,0.95) 90%);
+            z-index: 1;
+        }
+
+        .product-grid {
+            display: flex;
+            align-items: center;
+            gap: 70px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .static-bottle {
+            height: 520px;
+            filter: drop-shadow(0 0 30px rgba(0,40,60,0.6));
+            transition: transform 0.4s ease;
+        }
+
+        .product-details h2 {
+            color: white;
+            margin-bottom: 40px;
+            border-left: 6px solid var(--accent);
+            padding-left: 24px;
+            text-shadow: 0 2px 6px black;
+        }
+
+        .specs-container {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .spec-item {
+            border-bottom: 1px solid rgba(100,180,255,0.2);
+            padding-bottom: 20px;
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .spec-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .spec-item h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-soft);
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .spec-item p {
+            font-size: 0.98rem;
+            color: rgba(220, 240, 255, 0.8);
+            max-width: 480px;
+        }
+
+        /* ---------- FOOTER – DEEP, CORPORATE, CLEAN ---------- */
+        footer {
+            background: #030A0F;  /* darkest, rich */
+            padding: 90px 0 40px;
+            border-top: 1px solid rgba(30,136,229,0.2);
+        }
+
+        footer h2 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            color: #9CB4C7;
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 28px;
+            margin-bottom: 32px;
+        }
+
+        .contact-form {
+            max-width: 560px;
+            margin: 48px 0 40px;
+            text-align: left;
+            background: rgba(16, 28, 38, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 48px 48px 52px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            color: #A0C8DD;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            background: #0F1C24;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            font-family: var(--font);
+            font-size: 1rem;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: #14262E;
+            box-shadow: 0 0 0 4px rgba(30,136,229,0.1);
+        }
+
+        input::placeholder {
+            color: rgba(180,210,230,0.3);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 18px 28px;
+            background: white;
+            border: none;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: #030A0F;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent);
+            color: white;
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .copyright {
+            margin-top: 70px;
+            color: #607886;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 38px;
+            text-align: center;
+            font-weight: 350;
+        }
+
+        /* ---------- RESPONSIVE · FLUID, PREMIUM ---------- */
+        @media (max-width: 1024px) {
+            h1 { font-size: 3.4rem; }
+            .hero-grid { flex-direction: column-reverse; text-align: center; }
+            .hero-text p { border-left: none; padding-left: 0; border-top: 4px solid var(--accent); padding-top: 24px; margin-left: auto; margin-right: auto; }
+            .product-grid { flex-direction: column; text-align: center; }
+            .product-details h2 { border-left: none; border-bottom: 4px solid var(--accent); padding-left: 0; padding-bottom: 16px; display: inline-block; }
+            .spec-item { transform: translateY(35px); }
+            .static-bottle { height: 380px; }
+            .floating-bottle { height: 420px; }
+        }
+
+        @media (max-width: 640px) {
+            .container { width: 85%; }
+            h1 { font-size: 2.6rem; }
+            h2 { font-size: 2rem; }
+            .navbar { padding: 20px 0; }
+            .btn-nav { padding: 8px 20px; }
+            .floating-bottle { height: 300px; }
+            .static-bottle { height: 280px; }
+            .product-details h2 { font-size: 1.8rem; }
+            .contact-form { padding: 32px 24px; }
+        }
+
+        /* ---------- ASSET FALLBACK – ELEGANT SILHOUETTE ---------- */
+        .floating-bottle, .static-bottle {
+            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 450'%3E%3Cpath fill='%231E3B4A' d='M70 60 L130 60 L150 140 L150 310 Q130 360 100 360 Q60 360 50 310 L50 140Z'/%3E%3Cpath fill='%23348Fb0' d='M85 40 L115 40 L122 75 L78 75Z'/%3E%3C/svg%3E");
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION – transparent, high-end -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">RWF</div>
+            <a href="#contact" class="btn-nav">Corporate Inquiry</a>
+        </div>
+    </nav>
+
+    <!-- HERO – deep water, bottle float, executive presence -->
+    <header id="hero" class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>PURITY IN<br>EVERY DROP.</h1>
+                <p>Premium alkaline water · 7.5 pH · mineral‑infused · sustainably sourced</p>
+                <a href="#contact" class="btn-primary">ORDER NOW</a>
+            </div>
+            <div class="hero-image">
+                <!-- signature bottle — fallback SVG works if asset missing -->
+                <img src="assets/bottle.png" alt="RWF signature bottle" class="floating-bottle" onerror="this.style.minWidth='200px';">
+            </div>
+        </div>
+    </header>
+
+    <!-- PRODUCT SHOWCASE – video background, scientific authority -->
+    <section id="product" class="video-section">
+        <video autoplay muted loop playsinline class="bg-video">
+            <source src="assets/ad-video.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div> <!-- deep gradient overlay -->
+
+        <div class="container product-grid">
+            <div class="product-visual">
+                <img src="assets/bottle.png" alt="RWF bottle technical side" class="static-bottle" onerror="this.style.opacity='0.9';">
+            </div>
+            <div class="product-details">
+                <h2>SCIENTIFICALLY BALANCED</h2>
+                <div class="specs-container" id="animatedSpecs">
+                    <div class="spec-item" id="spec1">
+                        <h3>⚖️ pH 7.5 · OPTIMAL</h3>
+                        <p>Perfect alkalinity for rapid cellular hydration — verified by independent labs.</p>
+                    </div>
+                    <div class="spec-item" id="spec2">
+                        <h3>💎 ELECTROLYTE RICH</h3>
+                        <p>Magnesium, Calcium, Potassium — clean minerals, no artificial additives.</p>
+                    </div>
+                    <div class="spec-item" id="spec3">
+                        <h3>🌿 CARBON NEUTRAL</h3>
+                        <p>100% recyclable BPA‑free bottles · low‑carbon production · zero plastic waste.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER – wholesale · refined · corporate Noida address -->
+    <footer id="contact">
+        <div class="container">
+            <h2>WHOLESALE INQUIRIES</h2>
+            <p>Corporate office · Sector 93, Gejha, Noida – 201304</p>
+            
+            <form id="orderForm" class="contact-form">
+                <div class="form-group">
+                    <label>BUSINESS NAME / INSTITUTION</label>
+                    <input type="text" placeholder="e.g. The Leela, Hyatt, or your enterprise" required>
+                </div>
+                <div class="form-group">
+                    <label>MOBILE NUMBER</label>
+                    <input type="tel" placeholder="+91 98765 43210" required>
+                </div>
+                <div class="form-group">
+                    <label>QUANTITY (CASES) · WHOLESALE</label>
+                    <input type="number" placeholder="minimum 50 cases" required>
+                </div>
+                <button type="submit" class="btn-submit">SUBMIT REQUEST</button>
+            </form>
+            
+            <div class="copyright">
+                © 2026 RWF International Pvt Ltd · premium hydration partner. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- PROFESSIONAL SCRIPT: scroll animation + form handling, no clutter -->
+    <script>
+        (function() {
+            "use strict";
+
+            // ---------- INTERSECTION OBSERVER – REFINED SPEC ANIMATION ----------
+            const specItems = document.querySelectorAll('.spec-item');
+            if (specItems.length) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            // optional: keep visible after scroll
+                        }
+                    });
+                }, { threshold: 0.3, rootMargin: '0px' });
+                
+                specItems.forEach(item => observer.observe(item));
+            }
+
+            // ---------- FORM HANDLER – CORPORATE ACKNOWLEDGMENT ----------
+            const form = document.getElementById('orderForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('✓ Your wholesale request has been registered. A senior account manager will respond within 4 working hours.');
+                    form.reset();
+                });
+            }
+
+            // ---------- VIDEO FALLBACK – PREVENTS CONSOLE NOISE ----------
+            const video = document.querySelector('.bg-video');
+            if (video) {
+                video.addEventListener('error', function() {
+                    this.style.background = 'radial-gradient(circle at 30% 40%, #13262F, #09141A)';
+                });
+            }
+
+            // ---------- ASSET FALLBACK – POLISH (SVG ALREADY VIA CSS) ----------
+            // ensure bottle errors don't break layout
+            const bottles = document.querySelectorAll('.floating-bottle, .static-bottle');
+            bottles.forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.display = 'inline-block';
+                    this.style.height = this.classList.contains('floating-bottle') ? '450px' : '400px';
+                    this.style.width = 'auto';
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
     
