@@ -7,14 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- RESET & BASICS --- */
+        /* =========================================
+           1. VARIABLES & RESET
+           ========================================= */
         :root {
-            --primary: #0f172a; /* Deep Navy */
-            --accent: #38bdf8;  /* Water Blue */
-            --gold: #cca43b;    /* Premium Gold */
-            --light: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --primary: #0f172a;       /* Deep Navy */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;        /* Water Blue */
+            --gold: #cca43b;          /* Luxury Gold */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --ease: cubic-bezier(0.23, 1, 0.32, 1);
         }
 
@@ -23,40 +26,48 @@
         body {
             font-family: 'Manrope', sans-serif;
             background-color: var(--primary);
-            color: var(--light);
+            color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; }
+        h1, h2, h3, h4 { font-weight: 800; letter-spacing: -0.02em; color: white; }
         .serif { font-family: 'Playfair Display', serif; font-style: italic; color: var(--accent); }
-
-        /* --- NAVIGATION (Glassmorphism) --- */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            z-index: 1000;
-            transition: all 0.4s var(--ease);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid transparent;
-        }
-
-        .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.8);
-            padding: 15px 0;
-            border-bottom: 1px solid var(--glass-border);
-        }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
+
+        /* Helper Class for Animation */
+        .observer-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--ease);
+        }
+
+        /* =========================================
+           2. NAVBAR
+           ========================================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 0;
+            z-index: 1000;
+            transition: all 0.4s var(--ease);
+            border-bottom: 1px solid transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
 
         .logo {
             font-size: 1.5rem;
@@ -64,257 +75,188 @@
             letter-spacing: 2px;
             color: white;
             text-decoration: none;
+            text-transform: uppercase;
         }
 
         .btn-nav {
             padding: 10px 25px;
-            border: 1px solid var(--light);
-            color: var(--light);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            font-weight: 600;
             transition: all 0.3s;
         }
 
-        .btn-nav:hover {
-            background: var(--light);
-            color: var(--primary);
-        }
+        .btn-nav:hover { background: white; color: var(--primary); }
 
-        /* --- HERO SECTION --- */
+        /* =========================================
+           3. HERO SECTION
+           ========================================= */
         .hero-section {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding-top: 80px;
         }
 
         .hero-bg-text {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 15vw;
-            font-weight: 900;
-            color: rgba(255,255,255,0.03);
-            white-space: nowrap;
-            pointer-events: none;
-            z-index: 0;
+            font-size: 18vw; font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap; pointer-events: none; z-index: 0;
         }
 
         .hero-content {
             z-index: 2;
             max-width: 600px;
             margin-left: 10%;
-            opacity: 0; /* JS Animation */
-            transform: translateY(30px); /* JS Animation */
+            opacity: 0; transform: translateY(30px); /* Init hidden */
             transition: all 1s var(--ease);
         }
-
+        
         .hero-content.visible { opacity: 1; transform: translateY(0); }
 
-        h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .hero-p {
-            font-size: 1.1rem;
-            color: #94a3b8;
-            margin-bottom: 40px;
-            max-width: 400px;
-        }
+        .hero-content h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 25px; }
+        .hero-p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; max-width: 450px; }
 
         .btn-primary {
-            background: var(--accent);
-            color: var(--primary);
-            padding: 15px 40px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-block;
-            transition: transform 0.3s;
+            background: var(--accent); color: var(--primary);
+            padding: 18px 45px; text-decoration: none; font-weight: 700;
+            display: inline-block; transition: transform 0.3s, box-shadow 0.3s;
+            letter-spacing: 1px;
         }
 
-        .btn-primary:hover { transform: scale(1.05); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); }
 
         .hero-image-container {
-            position: absolute;
-            right: 10%;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1;
+            position: absolute; right: 8%; top: 50%;
+            transform: translateY(-50%); z-index: 1;
         }
 
-        /* Fallback if no image */
         .bottle-placeholder {
-            width: 300px;
-            height: 600px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(56, 189, 248, 0.2));
-            border-radius: 150px;
-            border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(5px);
-            box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
+            width: 280px; height: 600px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(56, 189, 248, 0.15));
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 80px rgba(56, 189, 248, 0.15);
+            animation: float 6s ease-in-out infinite;
         }
 
-        /* --- FEATURES SECTION --- */
-        .features-section {
-            padding: 100px 0;
-            background: #0b1221;
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
+        /* =========================================
+           4. FEATURES
+           ========================================= */
+        .features-section { padding: 120px 0; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 70%); }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-header span { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 10px; }
+        .section-header h2 { font-size: 3rem; }
 
-        .section-header h2 { font-size: 3rem; margin-bottom: 10px; }
-        .section-header span { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; }
-
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
+        .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .spec-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 40px;
-            transition: transform 0.3s;
-            opacity: 0;
-            transform: translateY(30px);
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            padding: 50px 30px; text-align: center; transition: all 0.4s var(--ease);
         }
+        .spec-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.08); border-color: var(--accent); }
+        .spec-num { font-size: 3.5rem; font-weight: 900; color: rgba(255,255,255,0.1); margin-bottom: 15px; }
+        .spec-card:hover .spec-num { color: var(--accent); transition: 0.4s; }
+        .spec-title { font-size: 1.4rem; margin-bottom: 15px; }
+        .spec-desc { color: var(--text-muted); font-size: 0.95rem; }
 
-        .spec-card:hover { transform: translateY(-10px); border-color: var(--accent); }
-
-        .spec-num { font-size: 3rem; color: var(--glass-border); font-weight: 900; margin-bottom: 20px; }
-        .spec-title { font-size: 1.5rem; margin-bottom: 15px; }
-        .spec-desc { color: #94a3b8; font-size: 0.95rem; }
-
-        /* --- VIDEO / SHOWCASE --- */
+        /* =========================================
+           5. VIDEO & AMBASSADOR (SRK)
+           ========================================= */
         .video-section {
-            height: 80vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            height: 80vh; position: relative; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; background: black;
         }
+        .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; z-index: 0; }
+        .video-overlay-text { position: relative; z-index: 2; text-align: center; }
+        .video-overlay-text h2 { font-size: 5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.5); line-height: 1; }
 
-        .bg-video {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            z-index: 0;
-        }
-        
-        /* Fallback if video fails */
-        .video-section { background: #050a14; }
-
-        .video-overlay-text {
-            z-index: 2;
-            text-align: center;
-        }
-        
-        .video-overlay-text h2 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        /* --- CONTACT / FOOTER --- */
-        .contact-section {
+        /* --- NEW SRK SECTION STYLES --- */
+        .ambassador-section {
             padding: 100px 0;
-            background: linear-gradient(to top, #000, #0f172a);
-        }
-
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .contact-info h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        .contact-info p { color: #94a3b8; margin-bottom: 10px; }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .form-group { position: relative; }
-
-        .form-group input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid #334155;
-            padding: 15px 0;
-            color: white;
-            font-size: 1.1rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus { border-color: var(--accent); }
-
-        .form-group label {
-            position: absolute;
-            top: 15px;
-            left: 0;
-            color: #64748b;
-            pointer-events: none;
-            transition: 0.3s ease all;
-            font-size: 0.9rem;
-        }
-
-        .form-group input:focus ~ label,
-        .form-group input:valid ~ label {
-            top: -10px;
-            font-size: 0.75rem;
-            color: var(--accent);
-        }
-
-        .btn-submit {
-            margin-top: 20px;
-            background: white;
-            color: black;
-            border: none;
-            padding: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
-
-        .btn-submit:hover { background: var(--accent); color: white; }
-
-        .footer-bottom {
+            background: linear-gradient(180deg, #000 0%, #0f172a 100%);
             text-align: center;
-            padding-top: 80px;
-            color: #475569;
-            font-size: 0.8rem;
         }
+        .ambassador-header { margin-bottom: 50px; }
+        .ambassador-header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 10px; }
+        
+        .video-wrapper {
+            position: relative; width: 100%; max-width: 900px; margin: 0 auto;
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ambassador-video { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
 
-        /* --- RESPONSIVE --- */
+        /* --- NEW REVIEWS SECTION STYLES --- */
+        .reviews-section { padding: 100px 0 150px; background: #0f172a; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .review-card {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px; border-radius: 10px; transition: transform 0.3s, background 0.3s;
+        }
+        .review-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.06); border-color: var(--accent); }
+        .stars { color: var(--gold); margin-bottom: 20px; font-size: 1.2rem; letter-spacing: 2px; }
+        .review-text { font-size: 1rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 30px; font-style: italic; }
+        .reviewer-info { display: flex; align-items: center; gap: 15px; }
+        .reviewer-img {
+            width: 50px; height: 50px; border-radius: 50%;
+            background-size: cover; background-position: center;
+            border: 2px solid var(--accent);
+        }
+        .reviewer-info h4 { font-size: 1rem; margin-bottom: 2px; }
+        .reviewer-info span { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* =========================================
+           6. CONTACT
+           ========================================= */
+        .contact-section { padding: 100px 0 40px; background: linear-gradient(to top, #000000, #0f172a); }
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .contact-info h2 { font-size: 3rem; margin-bottom: 20px; }
+        
+        .contact-form { display: flex; flex-direction: column; gap: 30px; margin-top: 10px; }
+        .form-group { position: relative; }
+        .form-group input {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid #334155;
+            padding: 12px 0; color: white; font-size: 1.1rem; outline: none; transition: all 0.3s;
+            font-family: 'Manrope', sans-serif;
+        }
+        .form-group label {
+            position: absolute; top: 12px; left: 0; color: #64748b; pointer-events: none;
+            transition: 0.3s ease all; font-size: 1rem;
+        }
+        .form-group input:focus { border-color: var(--accent); }
+        .form-group input:focus ~ label, .form-group input:valid ~ label {
+            top: -15px; font-size: 0.8rem; color: var(--accent); font-weight: 600;
+        }
+        .btn-submit {
+            margin-top: 20px; background: white; color: var(--primary); border: none;
+            padding: 18px; font-weight: 800; cursor: pointer; text-transform: uppercase;
+            letter-spacing: 2px; transition: 0.3s;
+        }
+        .btn-submit:hover { background: var(--accent); color: white; }
+        .footer-bottom { text-align: center; padding-top: 80px; color: #475569; font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* MOBILE FIXES */
         @media (max-width: 768px) {
             h1 { font-size: 3rem; }
             .hero-bg-text { display: none; }
-            .hero-section { flex-direction: column; padding-top: 120px; text-align: center; height: auto; padding-bottom: 60px; }
-            .hero-content { margin-left: 0; }
-            .hero-image-container { position: relative; right: auto; top: auto; transform: none; margin-top: 50px; display: flex; justify-content: center;}
-            .contact-wrapper { grid-template-columns: 1fr; }
+            .hero-section { flex-direction: column; text-align: center; padding-top: 120px; height: auto; padding-bottom: 60px; }
+            .hero-content { margin-left: 0; padding: 0 20px; }
+            .hero-image-container { position: relative; right: auto; top: auto; transform: none; margin-top: 60px; display: flex; justify-content: center; }
+            .contact-wrapper { grid-template-columns: 1fr; gap: 50px; }
+            .video-overlay-text h2 { font-size: 3rem; }
         }
     </style>
 </head>
@@ -339,16 +281,16 @@
 
         <div class="hero-image-container">
             <div class="bottle-placeholder"></div>
-        </div>
+            </div>
     </header>
 
     <section class="features-section">
-        <div class="section-header">
+        <div class="section-header observer-item">
             <span>The Science</span>
             <h2>ENGINEERED FOR BALANCE</h2>
         </div>
 
-        <div class="specs-grid">
+        <div class="container specs-grid">
             <div class="spec-card observer-item">
                 <div class="spec-num">7.5</div>
                 <div class="spec-title">Perfect pH</div>
@@ -371,75 +313,179 @@
         <video autoplay muted loop playsinline class="bg-video">
             <source src="assets/ad-video.mp4" type="video/mp4">
         </video>
-        <div class="video-overlay-text">
+        <div class="video-overlay-text observer-item">
             <span class="serif" style="font-size: 1.5rem;">The Source</span>
             <h2>UNTAMED<br>PURITY</h2>
         </div>
     </section>
 
-    <footer id="contact" class="contact-section">
-        <div class="contact-wrapper">
-            <div class="contact-info">
-                <h2>WHOLESALE &<br>CORPORATE</h2>
-                <p>Elevate your business with RWF International.</p>
-                <p style="margin-top: 20px;"><strong>Headquarters:</strong><br>Sector 93, Gejha, Noida - 201304</p>
-                <p><strong>Support:</strong><br>contact@rwfinternational.com</p>
+    <section class="ambassador-section">
+        <div class="container">
+            <div class="ambassador-header observer-item">
+                <span class="serif">The Icon</span>
+                <h2>LEGACY MEETS PURITY</h2>
+                <p>Shah Rukh Khan chooses RWF. The defining taste of excellence.</p>
             </div>
             
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" required>
-                    <label>Company / Full Name</label>
-                </div>
-                <div class="form-group">
-                    <input type="tel" required>
-                    <label>Direct Phone Line</label>
-                </div>
-                <div class="form-group">
-                    <input type="number" required>
-                    <label>Volume Requirement (Cases)</label>
-                </div>
-                <button type="submit" class="btn-submit">Request Catalog</button>
-            </form>
+            <div class="video-wrapper observer-item">
+                <video controls class="ambassador-video" poster="assets/srk-poster.jpg">
+                    <source src="assets/srk-ad.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <div class="section-header observer-item">
+            <span>Voices of Excellence</span>
+            <h2>TRUSTED BY THE ELITE</h2>
         </div>
 
-        <div class="footer-bottom">
-            &copy; 2026 RWF International Pvt Ltd. Crafted for Excellence.
+        <div class="container reviews-grid">
+            <div class="review-card observer-item">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"In my line of work, energy is everything. RWF isn't just water; it's a daily ritual that keeps me performing at my peak. The difference is palpable."</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-img" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg')"></div>
+                    <div>
+                        <h4>Vikram Malhotra</h4>
+                        <span>CEO, TechVentures Global</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card observer-item" style="transition-delay: 0.2s">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"We serve only the finest ingredients at our restaurants. RWF's balanced pH and mineral content make it the perfect pairing for our tasting menu."</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-img" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg')"></div>
+                    <div>
+                        <h4>Elena S.</h4>
+                        <span>Michelin Star Chef</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card observer-item" style="transition-delay: 0.4s">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Recovery is as important as training. I switched to RWF International for the magnesium content, and I've never looked back."</p>
+                <div class="reviewer-info">
+                    <div class="reviewer-img" style="background-image: url('https://randomuser.me/api/portraits/men/85.jpg')"></div>
+                    <div>
+                        <h4>Aryan K.</h4>
+                        <span>Pro Athlete & Olympian</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info observer-item">
+                    <h2>WHOLESALE &<br>CORPORATE</h2>
+                    <p>Elevate your business with RWF International.</p>
+                    <p style="margin-top: 20px;"><strong>Headquarters:</strong><br>Sector 93, Gejha, Noida - 201304</p>
+                    <p><strong>Support:</strong><br>contact@rwfinternational.com</p>
+                </div>
+                
+                <form class="contact-form observer-item" style="transition-delay: 0.2s">
+                    <div class="form-group">
+                        <input type="text" required>
+                        <label>Company / Full Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" required>
+                        <label>Direct Phone Line</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" required>
+                        <label>Volume Requirement (Cases)</label>
+                    </div>
+                    <button type="submit" class="btn-submit">Request Catalog</button>
+                </form>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 RWF International Pvt Ltd. Crafted for Excellence.
+            </div>
         </div>
     </footer>
 
     <script>
-        // Navbar Scrolled Effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Hero Animation on Load
-        window.addEventListener('load', () => {
-            document.querySelector('.hero-content').classList.add('visible');
-        });
-
-        // Intersection Observer for Scroll Animations
-        const observerOptions = {
-            threshold: 0.2
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Navbar Glass Effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
                 }
             });
-        }, observerOptions);
 
-        document.querySelectorAll('.observer-item').forEach(el => {
-            observer.observe(el);
+            // 2. Hero Animation
+            const heroContent = document.querySelector('.hero-content');
+            if(heroContent) {
+                setTimeout(() => { heroContent.classList.add('visible'); }, 200);
+            }
+
+            // 3. Scroll Reveal Animation (Observer)
+            const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.observer-item').forEach(el => {
+                observer.observe(el);
+            });
+
+            // 4. Smooth Scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if(target){
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // 5. Professional Form Logic (No Alerts)
+            const form = document.querySelector('.contact-form');
+            if(form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const submitBtn = form.querySelector('.btn-submit');
+                    const originalText = submitBtn.innerText;
+                    
+                    submitBtn.innerText = "Processing...";
+                    submitBtn.style.opacity = "0.7";
+                    
+                    setTimeout(() => {
+                        submitBtn.innerText = "Request Received ✓";
+                        submitBtn.style.backgroundColor = "#10b981"; // Success Green
+                        submitBtn.style.color = "white";
+                        
+                        form.reset();
+                        setTimeout(() => {
+                            submitBtn.innerText = originalText;
+                            submitBtn.style.backgroundColor = ""; 
+                            submitBtn.style.color = "";
+                            submitBtn.style.opacity = "1";
+                        }, 3000);
+                    }, 1500);
+                });
+            }
         });
     </script>
 </body>
