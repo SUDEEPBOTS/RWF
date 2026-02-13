@@ -12,7 +12,7 @@
     --gold: #cca43b;          /* Luxury Gold */
     
     /* Glassmorphism Variables */
-    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-blur: blur(10px);
     
@@ -34,7 +34,7 @@ body {
     line-height: 1.6;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-weight: 800;
     letter-spacing: -0.02em;
     color: white;
@@ -54,6 +54,13 @@ h1, h2, h3 {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+/* Helper Class for Animation */
+.observer-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s var(--ease);
 }
 
 /* =========================================
@@ -252,9 +259,6 @@ h1, h2, h3 {
     text-align: center;
     transition: all 0.4s var(--ease);
     cursor: default;
-    /* Animation Start State */
-    opacity: 0;
-    transform: translateY(30px);
 }
 
 .spec-card:hover {
@@ -326,7 +330,115 @@ h1, h2, h3 {
 }
 
 /* =========================================
-   6. CONTACT / FOOTER SECTION
+   6. AMBASSADOR (SRK) SECTION
+   ========================================= */
+.ambassador-section {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #000 0%, #0f172a 100%);
+    text-align: center;
+}
+
+.ambassador-header {
+    margin-bottom: 50px;
+}
+
+.ambassador-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ambassador-video {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+/* =========================================
+   7. PREMIUM REVIEWS SECTION
+   ========================================= */
+.reviews-section {
+    padding: 100px 0 150px;
+    background: #0f172a;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.review-card {
+    background: var(--glass-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 10px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--accent);
+}
+
+.stars {
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.review-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #cbd5e1;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.reviewer-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid var(--accent);
+}
+
+.reviewer-info h4 {
+    font-size: 1rem;
+    color: white;
+    margin-bottom: 2px;
+}
+
+.reviewer-info span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   8. CONTACT / FOOTER SECTION
    ========================================= */
 .contact-section {
     padding: 100px 0 40px;
@@ -430,7 +542,7 @@ h1, h2, h3 {
 }
 
 /* =========================================
-   7. RESPONSIVE DESIGN (Mobile)
+   9. RESPONSIVE DESIGN (Mobile)
    ========================================= */
 @media (max-width: 768px) {
     /* Fonts adjustments */
@@ -466,4 +578,9 @@ h1, h2, h3 {
     }
     
     .video-overlay-text h2 { font-size: 3rem; }
+
+    /* New Section Mobile Adjustments */
+    .video-wrapper { border-radius: 10px; }
+    .review-card { padding: 30px; }
+    .reviews-grid { gap: 20px; }
 }
