@@ -1,8 +1,9 @@
 /* --- RESET & VARIABLES --- */
 :root {
     --primary: #ffffff;
-    --accent: #007bff;
-    --dark: #000000; /* Pitch Black background for seamless mix */
+    --accent: #007bff; /* Professional Blue */
+    --dark: #0a0a0a;
+    --text-grey: #cccccc;
     --font: 'Inter', sans-serif;
 }
 
@@ -15,131 +16,202 @@ body {
     overflow-x: hidden;
 }
 
-.container { width: 90%; max-width: 1200px; margin: 0 auto; }
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
 /* --- NAVBAR --- */
 .navbar {
-    position: absolute; width: 100%; padding: 20px 0; z-index: 100;
+    position: absolute;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 100;
+    background: transparent;
 }
 .nav-container { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; }
-.btn-nav { color: white; text-decoration: none; border: 1px solid white; padding: 8px 20px; font-size: 0.8rem; }
+.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 2px; }
+.btn-nav { 
+    color: white; text-decoration: none; border: 1px solid white; 
+    padding: 8px 20px; font-size: 0.8rem; text-transform: uppercase; 
+}
 
-/* --- HERO SECTION --- */
+/* --- SECTION 1: HERO (IMAGE BACKGROUND) --- */
 .hero-section {
-    min-height: 100vh; /* Changed to min-height */
+    height: 100vh;
     display: flex;
     align-items: center;
     position: relative;
-    /* Background Image */
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('assets/dark-water.jpg');
+    /* Yahan apni Dark Water Photo ka naam dalna */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('assets/dark-water.jpg');
     background-size: cover;
     background-position: center;
-    padding-bottom: 50px; /* Thodi jagah niche */
-}
-
-/* Ye woh magic hai jo line hatayega */
-.fade-bottom {
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%;
-    height: 150px; /* Itna hissa blend hoga */
-    background: linear-gradient(to bottom, transparent, #000000);
-    z-index: 2;
 }
 
 .hero-grid {
-    display: flex; align-items: center; justify-content: space-between; width: 100%;
-    position: relative; z-index: 3; /* Fade ke upar rahega content */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.hero-text h1 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
-.hero-text p { font-size: 1.1rem; color: #ddd; margin-bottom: 30px; max-width: 500px; }
+.hero-text h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: var(--text-grey);
+    margin-bottom: 40px;
+    max-width: 500px;
+}
 
 .btn-primary {
-    background: white; color: black; padding: 15px 40px;
-    text-decoration: none; font-weight: 700; display: inline-block;
+    background: var(--primary);
+    color: black;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: inline-block;
+    transition: 0.3s;
 }
 
+.btn-primary:hover { background: var(--accent); color: white; }
+
+/* Floating Animation Bottle */
 .floating-bottle {
-    height: 500px;
+    height: 550px;
     filter: drop-shadow(0 0 30px rgba(0,0,0,0.5));
     animation: float 4s ease-in-out infinite;
 }
-@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
 
-/* --- PRODUCT SECTION --- */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- SECTION 2: PRODUCT (VIDEO BACKGROUND) --- */
 .video-section {
     position: relative;
     padding: 100px 0;
-    background: #000; /* Black background match karne ke liye */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }
 
+/* Video Background Settings */
 .bg-video {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.6;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -2;
 }
+
 .overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, #000000, transparent, #000000); /* Upar niche black fade */
-    z-index: 1;
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); /* Darken video text ke liye */
+    z-index: -1;
 }
 
 .product-grid {
-    display: flex; align-items: center; gap: 50px;
-    position: relative; z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+    z-index: 1;
 }
 
-.static-bottle { height: 450px; filter: drop-shadow(0 0 20px black); }
+.static-bottle { height: 500px; }
 
-.product-details h2 { font-size: 2.5rem; margin-bottom: 40px; border-left: 5px solid var(--accent); padding-left: 20px; }
+.product-details h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    border-left: 5px solid var(--accent);
+    padding-left: 20px;
+}
 
+/* Animation Items */
 .spec-item {
-    margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;
-    opacity: 0; transform: translateX(50px); transition: all 0.8s ease-out;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+    
+    /* Hidden Start State */
+    opacity: 0;
+    transform: translateX(50px); /* Right se aayega */
+    transition: all 0.8s ease-out;
 }
-.spec-item.visible { opacity: 1; transform: translateX(0); }
-.spec-item h3 { color: var(--accent); margin-bottom: 5px; }
-.spec-item p { color: #ccc; font-size: 0.9rem; }
+
+.spec-item h3 { font-size: 1.2rem; color: var(--accent); margin-bottom: 5px; }
+.spec-item p { font-size: 0.9rem; color: #ddd; }
+
+/* Jab JS class add karega tab ye dikhega */
+.spec-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
 
 /* --- FOOTER --- */
-footer { background: #000; padding: 80px 0 30px; text-align: center; border-top: 1px solid #222; }
-.contact-form { max-width: 500px; margin: 40px auto; text-align: left; }
+footer {
+    background: #000;
+    padding: 80px 0 30px;
+    text-align: center;
+}
+
+.contact-form {
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: left;
+}
+
 .form-group { margin-bottom: 20px; }
-.form-group label { display: block; font-size: 0.8rem; margin-bottom: 8px; color: #888; }
-input { width: 100%; padding: 15px; background: #111; border: 1px solid #333; color: white; font-family: var(--font); }
-.btn-submit { width: 100%; padding: 15px; background: white; border: none; font-weight: 800; margin-top: 10px; }
+.form-group label { display: block; font-size: 0.8rem; margin-bottom: 8px; color: #888; letter-spacing: 1px; }
+
+input {
+    width: 100%;
+    padding: 15px;
+    background: #111;
+    border: 1px solid #333;
+    color: white;
+    font-family: var(--font);
+}
+
+input:focus { outline: none; border-color: var(--accent); }
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background: white;
+    border: none;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 .copyright { margin-top: 50px; color: #444; font-size: 0.8rem; }
 
-/* --- MOBILE RESPONSIVE --- */
+/* --- MOBILE RESPONSIVE (Yahan hai magic) --- */
 @media (max-width: 768px) {
-    /* Navbar */
-    .logo { font-size: 1.2rem; }
-    
-    /* Hero Section Fix */
-    .hero-section { 
-        height: auto; 
-        min-height: 100vh;
-        padding-top: 100px; 
-        text-align: center; 
-        display: block; /* Flex hata diya taaki stack ho */
-    }
-    .hero-grid { flex-direction: column; }
+    /* Hero Section */
+    .hero-section { height: auto; padding: 120px 0 60px; text-align: center; }
+    .hero-grid { flex-direction: column-reverse; } /* Photo upar, text neeche */
     
     .hero-text h1 { font-size: 2.5rem; }
-    .hero-image { margin-top: 40px; margin-bottom: 60px; }
-    .floating-bottle { height: 350px; } /* Mobile pe bottle choti */
-
-    /* Product Section Fix */
-    .product-grid { flex-direction: column; text-align: center; }
+    .floating-bottle { height: 350px; margin-bottom: 30px; }
     
-    /* Bottle ko bada aur text ke upar kiya */
-    .static-bottle { 
-        height: 350px; 
-        margin-bottom: 30px; 
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    /* Product Section */
+    .video-section { padding: 60px 0; height: auto; }
+    .product-grid { flex-direction: column; text-align: center; }
+    .static-bottle { height: 300px; margin-bottom: 30px; }
     
     .product-details h2 { 
         font-size: 1.8rem; 
@@ -149,5 +221,6 @@ input { width: 100%; padding: 15px; background: #111; border: 1px solid #333; co
         display: inline-block;
     }
     
-    .spec-item { text-align: left; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px; border: none; }
-}
+    .spec-item { transform: translateY(30px); } /* Mobile pe neeche se upar aayega */
+        }
+    
